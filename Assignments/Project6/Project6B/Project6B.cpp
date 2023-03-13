@@ -20,7 +20,7 @@ void printDiagram(int n) {
     if (n == 0) return;
     printDiagram(n - 1);
     printLine(1 << (n - 1));
-    cout << std::endl;
+    cout << endl;
 }
 
 /*

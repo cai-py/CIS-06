@@ -1,0 +1,2 @@
+
+    printSquare(n - 1);
