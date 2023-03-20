@@ -1,6 +1,7 @@
 {
-    "files.associations": {
-        "*.ejs": "html",
-        "iosfwd": "cpp"
-    }
+  "files.associations": {
+    "*.ejs": "html",
+    "iosfwd": "cpp",
+    "iostream": "cpp"
+  }
 }
