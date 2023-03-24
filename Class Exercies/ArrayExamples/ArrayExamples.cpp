@@ -6,9 +6,11 @@ using namespace std;
 const int N = 10;
 
 int main() {
+    // Declare and initialize arrays
     int x[N];
     int y[N] = { 0 };
     int z[N] = {1,2,3,4,5,6,7,8,9,10};
+
     int sum = 0;
     int max, min;
     int ave;
@@ -16,9 +18,9 @@ int main() {
     srand(time(0));
     // Initialize array
     for (int i = 0; i < N; i++){
-        //
-        //
-        x[i] - rand() % 100;
+        //cout << "Enter grade for x[" << i + 1 << "]: " << endl;
+        //cin >> x[i];
+        x[i] = rand() % 100;
     }
 
     // Print array;
@@ -40,47 +42,18 @@ int main() {
 
     cout << "Sum = " << sum << endl;
 
+    // find max and min and average
     max = x[0];
     min = x[0];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    cout << "Sum = " << sum << endl;
-
-    max = x[0];
-    min = x[0];
-
-    for (int i = 1; i < 10; i++) {
-        if (x[i] > max)
+    for (int i = 1; i < N; i++) {
+        if (x[i] > max) {
             max = x[i];
-        if (x[i] < min)
+        }
+        if (x[i] < min) {
             min = x[i];
-        cout << "Max = " << max << "Min = " << min << endl;
+        }
+        cout << "Max = " << max << ", Min = " << min << endl;
     }
 
     cout << "1 --> Max = " << max << endl;
