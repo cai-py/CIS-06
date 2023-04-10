@@ -37,9 +37,9 @@ void getDate(int *dptr, int *mptr, int *yptr) {
     // atoi() or aski to integer - https://www.simplilearn.com/tutorials/cpp-tutorial/atoi-in-cpp#:~:text=The%20atoi()%20function%20in,throwing%20any%20error%20or%20exception.
     // great video on how to diy an atoi() - https://www.youtube.com/watch?v=QyDE7cPycnU
     *dptr = atoi(day);
-    //cout << "dptr: " << dptr << endl;
+    //cout << "dptr: " << atoi(day) << endl;
     *yptr = atoi(year);
-    //cout << "yptr: " << yptr << endl;
+    //cout << "yptr: " << atoi(year) << endl;
 
     // last thing to do is to return a string with the month name
     const char* monthArray[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
@@ -50,7 +50,7 @@ void getDate(int *dptr, int *mptr, int *yptr) {
         if (strcmp(month, monthArray[i]) == 0) {
             // assign 'mptr' to i + 1 to get the right number of the month
             *mptr = i + 1;
-            //cout << mptr << "<--------" << endl;
+            //cout << "dmptr: " << i + 1 << endl;
             break;
         }
     }
