@@ -10,29 +10,38 @@ if the string is a palindrome.
 
 using namespace std;
 
-void paliCheck(string, int);
+bool paliCheck(string, int);
 
 int main() {
     string pdString;
 
-    cout << "Enter a word or phrase to check if it is a plindrome: ";
+    cout << "Enter a word or phrase to check if it is a palindrome: ";
     cin >> pdString;
 
     int stringLength = pdString.length();
-    paliCheck(pdString, stringLength);
+    if (paliCheck(pdString, stringLength)) {
+        cout << "true";
+    }else {
+        cout << "false";
+    }
+
+    return 0;
 }
 
-void paliCheck(string str, int n) {
+bool paliCheck(string str, int n) {
     // reverse string 
-    string revStr;
-    for (int i = 0; i < n; i++) {
-        for (int j = n; j > 0; j--) {
-            revStr[i] = str[j];
-        }
+    string revStr = "";
+    for (int i = n -1; i >= 0; i--) {
+        revStr += str[i];
     }
-    cout << "Reverse: " << revStr << endl;
+    
 
     // compare original string to reverse string
     // if match return true
     // if not matched return false
+    if (str == revStr) {
+        return true;
+    }else {
+        return false;
+    }
 }
