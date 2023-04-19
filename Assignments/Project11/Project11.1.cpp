@@ -5,15 +5,18 @@
 using namespace std;
 
 //fuctions
-void findSquares(int);
+void findSquares(int, int);
 
 int main() {
     int n = 100;
-    findSquares(n);
+    cout << left << setw(10) << "Number"
+        << left << setw(10) << "Square"
+        << left << setw(10) << "Root" << endl;
+    findSquares(n, 1);
 }
 
-void findSquares(int n){
-    cout << left << setw(10) << "Number"
+void findSquares(int n, int i){
+    /*cout << left << setw(10) << "Number"
         << left << setw(10) << "Square"
         << left << setw(10) << "Root" << endl;
     for (int i = 1; i <= n; i++) {
@@ -27,6 +30,17 @@ void findSquares(int n){
         cout << left << setw(10) << i 
             << left << setw(10) << square 
             << left << setw(10) << squareRoot << endl;
+    }*/
+    // make it recursive
+    if (i > n) {
+        return;
+    }else {
+        double square = i * i;
+        double squareRoot = sqrt(i);
+        cout << left << setw(10) << i 
+                << left << setw(10) << square 
+                << left << setw(10) << squareRoot << endl;
+        findSquares(n, i+1);
     }
 }
 
@@ -133,5 +147,5 @@ Number    Square    Root
 97        9409      9.84886   
 98        9604      9.89949   
 99        9801      9.94987   
-100       10000     10 
+100       10000     10    
 */
