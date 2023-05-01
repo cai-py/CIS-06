@@ -1,6 +1,4 @@
-#include <iostream>
-
-using namespace std;
+#pragma once
 
 class Time {
     private:
@@ -9,9 +7,7 @@ class Time {
         int min;
         int sec;
     public:
-        // constructor 
         Time();
-        // constructor w variables /Ex. Time t1(10,15,30);
         Time(int h, int m, int s);
 
         void setHour(int h);
@@ -25,7 +21,3 @@ class Time {
         void addMinute(int m);
         void addSecond(int s);
 };
-
-int main() {
-    return 0;
-}
