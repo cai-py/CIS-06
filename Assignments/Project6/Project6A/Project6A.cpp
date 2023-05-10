@@ -21,16 +21,27 @@ int main() {
 }
 
 bool isPrime(int num) {
-    if (num <= 10) {
-        if (num == 2 || num == 3 || num == 5 || num == 7) {
-            return true;
-        }
+    // special case
+    if (num <= 1) {
         return false;
-    }else if (num % 2 == 0 || num % 3 == 0 || num % 5 == 0 || num % 7 == 0) {
-        return false;
-    }else if (num % 1 == 0) {
-        return true;
     }
+    /* 
+    exapmle: '47'
+    i = 2
+    i <= sqrt(47) or 6.85565
+    47 % 2 == 0 ? false
+    47 % 3 == 0 ? false
+    47 % 4 == 0 ? false
+    47 % 5 == 0 ? false
+    47 % 6 == 0 ? false
+    return true // 47 is prime
+    */ 
+    for (int i = 2; i <= sqrt(num); i++) {
+        if (num % i == 0) {
+            return false;
+        }
+    }
+    return true;
 }
 
 /*
@@ -52,6 +63,8 @@ the argument is a prime number, or false otherwise. Demonstrate the function in 
 complete program.
 Use the isPrime function that you wrote to determine the list of all the prime numbers
 from 1 through 100 in a file.
+
+OUTPUT:
 
 2
 3
@@ -82,7 +95,11 @@ from 1 through 100 in a file.
 
 */
 
+
 /*
+CODE GRAVEYARD
+
+
 bool isPrime(int num) {
     if (num <= 1) {
         return false;

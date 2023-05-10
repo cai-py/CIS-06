@@ -10,37 +10,34 @@ int main() {
     int arr[] = {1, 4, 6, 5, 2, 7, 10};
 
     // search()
-    arr[7] = search(arr, 7, 6);// returns: 1, 4, 6, 5, 2, 7, 10
-    cout << "Search(): ";
-    for (int y : arr) {
-        cout << y << ", ";
-    }
-    cout << endl;
+    cout << "search(arr, 7, 6): " << search(arr, 7, 6) << endl;
+    cout << "search(arr, 7, 8): " << search(arr, 7, 8) << endl;
+    
 
     // reverse()
     int* revArr = reverse(arr, 7);// returns: 10, 7, 2, 5, 6, 4, 1 - needs to be assigned to a variable type 'int*'
-    cout << "revArr(): ";
+    cout << "revArr(arr, 7): {";
     for (int i = 0; i < 7; i++) {
         cout << revArr[i] << ", ";
     }
-    cout << endl;
+    cout << "}" << endl;
 
     // oddFirst()
-    int * oddFirstArr = oddFirst(arr, 7);// returns: 1, 5, 7, 4, 6, 2, 10 - needs to be assigned to a variable type 'int*'
-    cout << "oddFirst(): ";
+    int* oddFirstArr = oddFirst(arr, 7);// returns: 1, 5, 7, 4, 6, 2, 10 - needs to be assigned to a variable type 'int*'
+    cout << "oddFirst(arr, 7): {";
     for (int i = 0; i < 7; i++) {
         cout << oddFirstArr[i] << ", ";
     }
-    cout << endl;
+    cout << "}" << endl;
 }
 
 int search(int arr[7], int n, int val) {
-  for (int i = 0; i < 7; i++) {
+  for (int i = 0; i < n; i ++) {
     if (arr[i] == val) {
         return i;
     }
   }
-  return -1;
+    return -1;
 }
 
 int* reverse(int arr[7], int n) {
@@ -77,7 +74,9 @@ int* oddFirst(int arr[7], int n) {
 }
 
 /*
-Search(): 1, 4, 6, 5, 2, 7, 10, 
-revArr(): 10, 7, 2, 5, 6, 4, 1, 
-oddFirst(): 1, 5, 7, 4, 6, 2, 10,
+OUTPUT
+search(arr, 7, 6): 2
+search(arr, 7, 8): -1
+revArr(arr, 7): {10, 7, 2, 5, 6, 4, 1, }
+oddFirst(arr, 7): {1, 5, 7, 4, 6, 2, 10, }
 */
