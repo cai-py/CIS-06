@@ -9,15 +9,13 @@ private:
     string phoneNumber;
 
 public:
-    // constructors
-    Person(){}
+    // this type of constructor can create an object with the data passed to it from the pointer in the AddressBook object
     Person(const string& fName, const string& lName, const string& number) {
-        firstName = fName;
-        lastName = lName;
-        phoneNumber = number;
-    }
+            firstName = fName;
+            lastName = lName;
+            phoneNumber = number;
+        }
 
-    // access methods
     string getFirstName() const {
         return firstName;
     }
@@ -33,64 +31,51 @@ public:
 
 class AddressBook {
 private:
-    /*
-    NOTES
-    Using a pointer to a pointer allows for dynamic memory 
-    allocation, where the size of the array can be determined 
-    at runtime. In this case, it will be used to store the 
-    collection of Person objects in the address book.
-
-    Since persons is a double pointer, it can be used to point 
-    to the start of the dynamic array. Each element in the array 
-    will be a pointer to a Person object.
-    */
-    Person** persons;
-    int capacity;
+    Person* persons[10000];
     int size;
 
 public:
-    AddressBook() : persons(nullptr), capacity(0), size(0) {}
-
-    ~AddressBook() {
-        for (int i = 0; i < size; ++i) {
-            delete persons[i];
-        }
-        delete[] persons;
+    AddressBook() {
+        size = 0;
     }
 
+    // add person method
+    // takes the person object passed to it and adds it to the array of people in our AddressBook
     void addPerson(const Person& person) {
-        if (size == capacity) {
-            int newCapacity = (capacity == 0) ? 1 : capacity * 2;
-            Person** newPersons = new Person*[newCapacity];
-            for (int i = 0; i < size; ++i) {
-                newPersons[i] = persons[i];
-            }
-            delete[] persons;
-            persons = newPersons;
-            capacity = newCapacity;
-        }
+        // check size of address book
+        if (size < 10000) {
 
-        persons[size] = new Person(person.getFirstName(), person.getLastName(), person.getPhoneNumber());
-        ++size;
+            persons[size] = new Person(person.getFirstName(), person.getLastName(), person.getPhoneNumber());
+            ++size;
+        }
+        else {
+            cout << "Address book is full, delete a person to add more." << endl;
+        }
     }
 
+    // delete
     void deletePerson(const Person& person) {
         for (int i = 0; i < size; ++i) {
+            // finds the person matching the exact parameter you want to delete
             if (persons[i]->getFirstName() == person.getFirstName() &&
                 persons[i]->getLastName() == person.getLastName() &&
                 persons[i]->getPhoneNumber() == person.getPhoneNumber()) {
+                // deletes found person
                 delete persons[i];
-                for (int j = i + 1; j < size; ++j) {
-                    persons[j - 1] = persons[j];
-                }
                 --size;
-                return;
+                // restructure array
+                for (int j = i; j < size; ++j) {
+                    persons[j] = persons[j + 1];
+                }
             }
         }
+        cout << "Person not found in the address book." << endl;
     }
 
     void searchPerson(const string& searchTerm) {
+        // create conditional statement
         bool found = false;
+        // search array and print if found
         for (int i = 0; i < size; ++i) {
             if (persons[i]->getFirstName() == searchTerm ||
                 persons[i]->getLastName() == searchTerm ||
@@ -101,6 +86,7 @@ public:
                 found = true;
             }
         }
+        // if not found print message 
         if (!found) {
             cout << "No matching persons found." << endl;
         }
@@ -111,77 +97,44 @@ int main() {
     AddressBook addressBook;
 
     // Adding persons to the address book
-    Person person1("John", "Doe", "1234567890");
+    // create a person object and pass it into the addPerson() function in the AddressBook object.
+    Person person1("Alex", "G", "1234567890");
     addressBook.addPerson(person1);
 
-    Person person2("Jane", "Smith", "9876543210");
+    Person person2("Tame", "Impala", "234567901");
     addressBook.addPerson(person2);
 
-    Person person3("Alice", "Johnson", "5555555555");
+    Person person3("Alan", "Turing", "3456789012");
     addressBook.addPerson(person3);
 
     // Searching for a person
-    cout << "Searching for persons with last name 'Doe': " << endl;
-    addressBook.searchPerson("Doe");
+    cout << "Searching for persons with last name 'Turing': " << endl;
+    addressBook.searchPerson("Turing");
 
     // Deleting a person
-    cout << "Deleting person with phone number '9876543210': " << endl;
-    Person personToDelete("Jane", "Smith", "9876543210");
+    cout << "Deleting person with phone number '1234567890': " << endl;
+    // every parameter needs to match the person exactly
+    Person personToDelete("Alex", "G", "1234567890");
     addressBook.deletePerson(personToDelete);
 
     // Searching after deletion
-    cout << "Searching for persons with last name 'Smith': " << endl;
-    addressBook.searchPerson("Smith");
+    cout << "Searching for persons with last name 'G': " << endl;
+    addressBook.searchPerson("G");
 
     return 0;
 }
 
 
 
-
 /*
-#include <iostream>
+OUTPUT
+Searching for persons with last name 'Turing': 
+First Name: Alan
+Last Name: Turing
+Phone Number: 3456789012
 
-using namespace std;
-class Person {
-    private:
-        string firstName;
-        string lastName;
-        int phoneNumber;
-    public:
-        // constructor 
-        Person() {}
-        Person(string fName, string lName, int number) {
-            firstName = fName;
-            lastName = lName;
-            phoneNumber = number;
-        }
-        string getFrirstName() {
-            return firstName;
-        }
-        string getLastName() {
-            return lastName;
-        }
-        int getPhoneNumber() {
-            return phoneNumber;
-        }
-
-};
-
-class AddressBook {
-    private:
-        Person people[1000];
-
-
-    public:
-        AddressBook(){}
-        AddressBook(Person P1) {
-            people[1000] = P1;
-        }
-    
-};
-
-int main() {
-    cout << "Hello" << endl;
-}
+Deleting person with phone number '1234567890': 
+Person not found in the address book.
+Searching for persons with last name 'G': 
+No matching persons found.
 */
